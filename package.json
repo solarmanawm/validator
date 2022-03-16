@@ -1,0 +1,37 @@
+{
+    "name": "sm.validator",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "test": "jest --roots tests"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {},
+    "babel": {
+        "presets": [
+            [
+                "@babel/preset-env",
+                {
+                    "targets": {
+                        "node": "current"
+                    }
+                }
+            ]
+        ]
+    },
+    "jest": {
+        "transformIgnorePatterns": [
+            "node_modules"
+        ]
+    },
+    "devDependencies": {
+        "@babel/core": "^7.17.7",
+        "@babel/preset-env": "^7.16.11",
+        "babel-jest": "^27.5.1",
+        "jest": "^27.5.1"
+    }
+}
