@@ -10,6 +10,13 @@ describe('Email validation', () => {
     };
     const validator = createValidator(schema);
 
+    test('Invalid type', () => {
+        const data = {
+            [EMAIL_KEY]: 123123,
+        };
+        expect(() => validator.validate(data)).toThrow(Error);
+    });
+
     test('Empty', () => {
         const data = {
             [EMAIL_KEY]: '',

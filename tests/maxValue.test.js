@@ -13,53 +13,9 @@ describe('Max value validation', () => {
     };
     const validator = createValidator(schema);
 
-    test('Empty', () => {
-        const data = {
-            [DATA_KEY]: '',
-        };
-        const valid = validator.validate(data);
-        const errors = validator.getErrors();
-        const keys = Object.keys(errors);
-        expect(valid).toBe(true);
-        expect(keys.length).toBe(0);
-    });
-
     test('Less', () => {
         const data = {
             [DATA_KEY]: 3,
-        };
-        const valid = validator.validate(data);
-        const errors = validator.getErrors();
-        const keys = Object.keys(errors);
-        expect(valid).toBe(true);
-        expect(keys.length).toBe(0);
-    });
-
-    test('True', () => {
-        const data = {
-            [DATA_KEY]: true,
-        };
-        const valid = validator.validate(data);
-        const errors = validator.getErrors();
-        const keys = Object.keys(errors);
-        expect(valid).toBe(true);
-        expect(keys.length).toBe(0);
-    });
-
-    test('False', () => {
-        const data = {
-            [DATA_KEY]: false,
-        };
-        const valid = validator.validate(data);
-        const errors = validator.getErrors();
-        const keys = Object.keys(errors);
-        expect(valid).toBe(true);
-        expect(keys.length).toBe(0);
-    });
-
-    test('Null', () => {
-        const data = {
-            [DATA_KEY]: null,
         };
         const valid = validator.validate(data);
         const errors = validator.getErrors();
@@ -104,6 +60,27 @@ describe('Type validation', () => {
         },
     };
     const validator = createValidator(schema);
+
+    test('String', () => {
+        const data = {
+            [DATA_KEY]: '',
+        };
+        expect(() => validator.validate(data)).toThrow(Error);
+    });
+
+    test('Boolean', () => {
+        const data = {
+            [DATA_KEY]: true,
+        };
+        expect(() => validator.validate(data)).toThrow(Error);
+    });
+
+    test('Null', () => {
+        const data = {
+            [DATA_KEY]: null,
+        };
+        expect(() => validator.validate(data)).toThrow(Error);
+    });
 
     test('Object', () => {
         const data = {

@@ -152,6 +152,22 @@ class Validator {
         });
         return errors;
     }
+
+    destroy () {
+        this._feedback.clear();
+        this._extend.clear();
+        this._requests.clear();
+        this._handlers.clear();
+        delete this._schema;
+        delete this._messages;
+        delete this._current;
+        delete this._isValid;
+        delete this._feedback;
+        delete this._extend;
+        delete this._requests;
+        delete this._handlers;
+        delete this._isRegisted;
+    }
 }
 
 export default Validator;
