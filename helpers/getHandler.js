@@ -3,6 +3,7 @@ import EmailHandler from '../classes/handler/EmailHandler.js';
 import RequiredHandler from '../classes/handler/RequiredHandler.js';
 import PatternHandler from '../classes/handler/PatternHandler.js';
 import MinLengthHandler from '../classes/handler/MinLengthHandler.js';
+import MaxLengthHandler from '../classes/handler/MaxLengthHandler.js';
 
 /**
  * Get a handler by its type.
@@ -38,6 +39,12 @@ const getHandler = (validator, type) => {
          */
         [HANDLER_TYPES.minLength]: () => {
             return new MinLengthHandler(validator, HANDLER_TYPES.minLength);
+        },
+        /**
+         * @returns {MaxLengthHandler}
+         */
+        [HANDLER_TYPES.maxLength]: () => {
+            return new MaxLengthHandler(validator, HANDLER_TYPES.maxLength);
         },
     };
     return typeof handlers[type] === 'function' ? handlers[type]() : undefined;
