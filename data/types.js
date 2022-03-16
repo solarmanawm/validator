@@ -1,5 +1,5 @@
 /**
- * @type {{minLength: string, pattern: string, email: string, required: string, maxLength: string}}
+ * @type {{minValue: string, minLength: string, pattern: string, email: string, required: string, maxLength: string}}
  */
 const HANDLER_TYPES = {
     email: 'email',
@@ -7,6 +7,7 @@ const HANDLER_TYPES = {
     pattern: 'pattern',
     minLength: 'minLength',
     maxLength: 'maxLength',
+    minValue: 'minValue',
 };
 
 export default HANDLER_TYPES;
