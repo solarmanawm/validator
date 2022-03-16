@@ -58,7 +58,8 @@ class AbstractHandler {
     handle (request) {
         const {type, value, condition} = request.getDetails();
         if (this._type === type) {
-            this._validator.addFeedback(new Feedback(type, this._validator._messages[type], condition, this._validate(condition, value)));
+            this._validator.addFeedback(
+                new Feedback(type, this._validator._messages[type], condition, this._validate(condition, value)));
         }
         return this._next ? this._next.handle(request) : null;
     }

@@ -9,7 +9,7 @@ class MinValueHandler extends AbstractHandler {
      * @private
      */
     _validate (condition, source) {
-        const number = Number(source)
+        const number = Number(source);
         if (isNaN(number)) {
             throw new Error('MinValueHandler: source can not be represented as a number.');
         }

@@ -46,7 +46,7 @@ class Feedback {
      * Serialize to string.
      * @returns {string}
      */
-    toString() {
+    toString () {
         return Helpers.getErrorMessage(this._type, this._message, this._condition);
     }
 }
