@@ -10,6 +10,7 @@ const ERROR_MESSAGES = {
     [HANDLER_TYPES.minLength]: 'Min length should be %s%.',
     [HANDLER_TYPES.minLength]: 'Max length should be %s%.',
     [HANDLER_TYPES.minValue]: 'This value should be at least %s%.',
+    [HANDLER_TYPES.maxValue]: 'This value should be %s% max.',
 };
 
 export default ERROR_MESSAGES;

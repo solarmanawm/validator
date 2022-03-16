@@ -5,6 +5,7 @@ import PatternHandler from '../classes/handler/PatternHandler.js';
 import MinLengthHandler from '../classes/handler/MinLengthHandler.js';
 import MaxLengthHandler from '../classes/handler/MaxLengthHandler.js';
 import MinValueHandler from '../classes/handler/MinValueHandler.js';
+import MaxValueHandler from '../classes/handler/MaxValueHandler.js';
 
 /**
  * Get a handler by its type.
@@ -52,6 +53,12 @@ const getHandler = (validator, type) => {
          */
         [HANDLER_TYPES.minValue]: () => {
             return new MinValueHandler(validator, HANDLER_TYPES.minValue);
+        },
+        /**
+         * @returns {MaxValueHandler}
+         */
+        [HANDLER_TYPES.maxValue]: () => {
+            return new MaxValueHandler(validator, HANDLER_TYPES.maxValue);
         },
     };
     return typeof handlers[type] === 'function' ? handlers[type]() : undefined;
