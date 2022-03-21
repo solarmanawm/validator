@@ -123,13 +123,13 @@ class Validator {
         this._register();
         this._isValid = true;
         this._feedback.clear();
-        Object.entries(validatable).forEach(([key, value]) => {
+        Object.keys(this._schema).forEach((key) => {
             const queue = this._handlers.get(key);
             const requests = this._requests.get(key);
             if (typeof queue !== 'undefined' && typeof requests !== 'undefined') {
                 this._current = key;
                 requests.forEach((request) => {
-                    request.setValue(value);
+                    request.setValue(validatable[key]);
                     queue.start(request);
                 });
             }
