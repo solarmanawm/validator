@@ -67,6 +67,12 @@ class Validator {
          */
         this._isRegisted = false;
 
+        /**
+         * @type {object}
+         * @private
+         */
+        this._validatable = {};
+
         this._register(schema);
     }
 
@@ -121,6 +127,7 @@ class Validator {
      */
     validate (validatable) {
         this._register();
+        this._validatable = Object.freeze(validatable);
         this._isValid = true;
         this._feedback.clear();
         Object.keys(this._schema).forEach((key) => {
@@ -129,11 +136,12 @@ class Validator {
             if (typeof queue !== 'undefined' && typeof requests !== 'undefined') {
                 this._current = key;
                 requests.forEach((request) => {
-                    request.setValue(validatable[key]);
+                    request.setValue(this._validatable[key]);
                     queue.start(request);
                 });
             }
         });
+        this._validatable = null;
         this._current = null;
         return this._isValid;
     }
@@ -153,6 +161,9 @@ class Validator {
         return errors;
     }
 
+    /**
+     * Destroy a validator instance.
+     */
     destroy () {
         this._feedback.clear();
         this._extend.clear();
@@ -167,6 +178,7 @@ class Validator {
         delete this._requests;
         delete this._handlers;
         delete this._isRegisted;
+        delete this._validatable;
     }
 }
 

@@ -8,6 +8,9 @@ const typeCheckers = {
     number: (value) => {
         return typeof value === 'number';
     },
+    boolean: (value) => {
+        return typeof value === 'boolean';
+    },
 };
 
 const checkType = (condition, isArray, value) => {
