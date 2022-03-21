@@ -3,13 +3,12 @@ import Validator from '../Validator.js';
 
 class RequiredIfHandler extends AbstractHandler {
     /**
-     * Validate a value.
+     * Validate a locatory property.
      * @param {boolean} condition
-     * @param {string} value
      * @returns {boolean}
      * @private
      */
-    _validate (condition, value) {
+    _validateLocator (condition) {
         const locator = this._validator._validatable[condition];
         const conditionSchema = {
             condition: {
@@ -23,7 +22,18 @@ class RequiredIfHandler extends AbstractHandler {
             throw new Error('RequiredIfHandler: a locator property should be of a boolean type');
         }
         conditionValidator.destroy();
-        return locator && typeof value !== 'undefined';
+        return locator;
+    }
+
+    /**
+     * Validate a value.
+     * @param {boolean} condition
+     * @param {string} value
+     * @returns {boolean}
+     * @private
+     */
+    _validate (condition, value) {
+        return this._validateLocator(condition) && typeof value !== 'undefined';
     }
 }
 

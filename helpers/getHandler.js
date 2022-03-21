@@ -3,6 +3,7 @@ import TypeHandler from '../classes/handler/TypeHandler.js';
 import EmailHandler from '../classes/handler/EmailHandler.js';
 import RequiredHandler from '../classes/handler/RequiredHandler.js';
 import RequiredIfHandler from '../classes/handler/RequiredIfHandler.js';
+import RequiredUnlessHandler from '../classes/handler/RequiredUnlessHandler.js';
 import PatternHandler from '../classes/handler/PatternHandler.js';
 import MinLengthHandler from '../classes/handler/MinLengthHandler.js';
 import MaxLengthHandler from '../classes/handler/MaxLengthHandler.js';
@@ -43,6 +44,12 @@ const getHandler = (validator, type) => {
          */
         [HANDLER_TYPES.requiredIf]: () => {
             return new RequiredIfHandler(validator, HANDLER_TYPES.requiredIf);
+        },
+        /**
+         * @returns {RequiredUnlessHandler}
+         */
+        [HANDLER_TYPES.requiredUnless]: () => {
+            return new RequiredUnlessHandler(validator, HANDLER_TYPES.requiredUnless);
         },
         /**
          * @returns {PatternHandler}
