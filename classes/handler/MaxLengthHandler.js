@@ -1,4 +1,5 @@
 import AbstractHandler from './AbstractHandler.js';
+import Validator from '../Validator.js';
 
 class MaxLengthHandler extends AbstractHandler {
     /**
@@ -9,9 +10,26 @@ class MaxLengthHandler extends AbstractHandler {
      * @private
      */
     _validate (condition, source) {
-        if (typeof source !== 'string' && !Array.isArray(source)) {
-            throw new Error('MaxLengthHandler: source is not string or array');
+        const conditionSchema = {
+            condition: {
+                type: 'number',
+            },
+        };
+        const sourceSchema = {
+            source: {
+                type: ['string', 'array'],
+            },
+        };
+        const conditionValidator = new Validator(conditionSchema, {});
+        const sourceValidator = new Validator(sourceSchema, {});
+        if (!conditionValidator.validate({condition})) {
+            throw new Error('MaxLengthHandler: max length needs to be a number');
         }
+        if (!sourceValidator.validate({source})) {
+            throw new Error('MaxLengthHandler: source value needs to be a string or an array');
+        }
+        conditionValidator.destroy();
+        sourceValidator.destroy();
         return source.length <= condition;
     }
 }

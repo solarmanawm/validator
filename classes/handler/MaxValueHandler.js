@@ -1,4 +1,5 @@
 import AbstractHandler from './AbstractHandler.js';
+import Validator from '../Validator.js';
 
 class MaxValueHandler extends AbstractHandler {
     /**
@@ -9,11 +10,27 @@ class MaxValueHandler extends AbstractHandler {
      * @private
      */
     _validate (condition, source) {
-        const number = Number(source);
-        if (isNaN(number)) {
-            throw new Error('MaxValueHandler: source can not be represented as a number.');
+        const conditionSchema = {
+            condition: {
+                type: 'number',
+            },
+        };
+        const sourceSchema = {
+            source: {
+                type: 'number',
+            },
+        };
+        const conditionValidator = new Validator(conditionSchema, {});
+        const sourceValidator = new Validator(sourceSchema, {});
+        if (!conditionValidator.validate({condition})) {
+            throw new Error('MaxValueHandler: max value needs to be a number');
         }
-        return number <= condition;
+        if (!sourceValidator.validate({source})) {
+            throw new Error('MaxValueHandler: source value needs to be a number');
+        }
+        conditionValidator.destroy();
+        sourceValidator.destroy();
+        return source <= condition;
     }
 }
 

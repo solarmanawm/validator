@@ -1,4 +1,5 @@
 import HANDLER_TYPES from '../data/types.js';
+import TypeHandler from '../classes/handler/TypeHandler.js';
 import EmailHandler from '../classes/handler/EmailHandler.js';
 import RequiredHandler from '../classes/handler/RequiredHandler.js';
 import PatternHandler from '../classes/handler/PatternHandler.js';
@@ -18,6 +19,12 @@ const getHandler = (validator, type) => {
      * @type {{}}
      */
     const handlers = {
+        /**
+         * @returns {TypeHandler}
+         */
+        [HANDLER_TYPES.type]: () => {
+            return new TypeHandler(validator, HANDLER_TYPES.type);
+        },
         /**
          * @returns {EmailHandler}
          */

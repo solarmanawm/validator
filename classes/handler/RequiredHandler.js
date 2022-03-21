@@ -9,7 +9,7 @@ class RequiredHandler extends AbstractHandler {
      * @private
      */
     _validate (condition, value) {
-        return condition && value.toString().trim().length !== 0;
+        return typeof value !== 'undefined';
     }
 }
 
