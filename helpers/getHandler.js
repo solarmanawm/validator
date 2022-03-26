@@ -24,62 +24,62 @@ const getHandler = (validator, type) => {
         /**
          * @returns {TypeHandler}
          */
-        [HANDLER_TYPES.type]: () => {
-            return new TypeHandler(validator, HANDLER_TYPES.type);
+        [HANDLER_TYPES.type.name]: () => {
+            return new TypeHandler(validator, HANDLER_TYPES.type.name);
         },
         /**
          * @returns {EmailHandler}
          */
-        [HANDLER_TYPES.email]: () => {
-            return new EmailHandler(validator, HANDLER_TYPES.email);
+        [HANDLER_TYPES.email.name]: () => {
+            return new EmailHandler(validator, HANDLER_TYPES.email.name);
         },
         /**
          * @returns {RequiredHandler}
          */
-        [HANDLER_TYPES.required]: () => {
-            return new RequiredHandler(validator, HANDLER_TYPES.required);
+        [HANDLER_TYPES.required.name]: () => {
+            return new RequiredHandler(validator, HANDLER_TYPES.required.name);
         },
         /**
          * @returns {RequiredIfHandler}
          */
-        [HANDLER_TYPES.requiredIf]: () => {
-            return new RequiredIfHandler(validator, HANDLER_TYPES.requiredIf);
+        [HANDLER_TYPES.requiredIf.name]: () => {
+            return new RequiredIfHandler(validator, HANDLER_TYPES.requiredIf.name);
         },
         /**
          * @returns {RequiredUnlessHandler}
          */
-        [HANDLER_TYPES.requiredUnless]: () => {
-            return new RequiredUnlessHandler(validator, HANDLER_TYPES.requiredUnless);
+        [HANDLER_TYPES.requiredUnless.name]: () => {
+            return new RequiredUnlessHandler(validator, HANDLER_TYPES.requiredUnless.name);
         },
         /**
          * @returns {PatternHandler}
          */
-        [HANDLER_TYPES.pattern]: () => {
-            return new PatternHandler(validator, HANDLER_TYPES.pattern);
+        [HANDLER_TYPES.pattern.name]: () => {
+            return new PatternHandler(validator, HANDLER_TYPES.pattern.name);
         },
         /**
          * @returns {MinLengthHandler}
          */
-        [HANDLER_TYPES.minLength]: () => {
-            return new MinLengthHandler(validator, HANDLER_TYPES.minLength);
+        [HANDLER_TYPES.minLength.name]: () => {
+            return new MinLengthHandler(validator, HANDLER_TYPES.minLength.name);
         },
         /**
          * @returns {MaxLengthHandler}
          */
-        [HANDLER_TYPES.maxLength]: () => {
-            return new MaxLengthHandler(validator, HANDLER_TYPES.maxLength);
+        [HANDLER_TYPES.maxLength.name]: () => {
+            return new MaxLengthHandler(validator, HANDLER_TYPES.maxLength.name);
         },
         /**
          * @returns {MinValueHandler}
          */
-        [HANDLER_TYPES.minValue]: () => {
-            return new MinValueHandler(validator, HANDLER_TYPES.minValue);
+        [HANDLER_TYPES.minValue.name]: () => {
+            return new MinValueHandler(validator, HANDLER_TYPES.minValue.name);
         },
         /**
          * @returns {MaxValueHandler}
          */
-        [HANDLER_TYPES.maxValue]: () => {
-            return new MaxValueHandler(validator, HANDLER_TYPES.maxValue);
+        [HANDLER_TYPES.maxValue.name]: () => {
+            return new MaxValueHandler(validator, HANDLER_TYPES.maxValue.name);
         },
     };
     return typeof handlers[type] === 'function' ? handlers[type]() : undefined;

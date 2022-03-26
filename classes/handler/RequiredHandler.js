@@ -3,13 +3,13 @@ import AbstractHandler from './AbstractHandler.js';
 class RequiredHandler extends AbstractHandler {
     /**
      * Validate a value.
-     * @param {boolean} condition
-     * @param {string} value
+     * @param {object} request
      * @returns {boolean}
      * @private
      */
-    _validate (condition, value) {
-        return typeof value !== 'undefined';
+    _validate (request) {
+        const {condition, value} = request.getDetails();
+        return condition ? typeof value !== 'undefined' : true;
     }
 }
 

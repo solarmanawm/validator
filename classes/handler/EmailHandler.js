@@ -4,12 +4,12 @@ import Validator from '../Validator.js';
 class EmailHandler extends AbstractHandler {
     /**
      * Validate a value.
-     * @param {boolean} condition
-     * @param {string} value
+     * @param {object} request
      * @returns {boolean}
      * @private
      */
-    _validate (condition, value) {
+    _validate (request) {
+        const {condition, value} = request.getDetails();
         const valueSchema = {
             value: {
                 type: 'string',

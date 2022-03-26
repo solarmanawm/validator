@@ -85,15 +85,16 @@ class Validator {
             return;
         }
         Object.keys(this._schema).forEach((key) => {
-            const requests = this._requests.set(key, []).get(key);
             const queue = new Queue();
-            Object.keys(this._schema[key]).forEach((k) => {
+            const requests = Object.keys(this._schema[key]).map((k) => {
                 const handler = Helpers.getHandler(this, k);
-                if (typeof handler !== 'undefined') {
-                    requests.push(new Request(k, this._schema[key][k]));
-                    queue.add(handler);
+                if (typeof handler === 'undefined') {
+                    throw new Error(`[Validator] No handler found for the "${k}" request type.`);
                 }
-            });
+                queue.add(handler);
+                return new Request(k, this._schema[key][k]);
+            }).sort(Helpers.sortSchemaKeys);
+            this._requests.set(key, requests);
             this._handlers.set(key, queue);
         });
         this._isRegisted = true;

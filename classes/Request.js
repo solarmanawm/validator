@@ -22,17 +22,28 @@ class Request {
          * @private
          */
         this._value = null;
+
+        /**
+         * @type {boolean}
+         * @private
+         */
+        this._disabled = false;
+    }
+
+    isActive (typeToCompare) {
+        return typeToCompare === this._type && !this._disabled;
     }
 
     /**
      * Get request data.
-     * @returns {{condition: *, type: string, value: *|null}}
+     * @returns {{condition: *, disabled: boolean, type: string, value: (*|null)}}
      */
     getDetails () {
         return {
             type: this._type,
             value: this._value,
             condition: this._condition,
+            disabled: this._disabled,
         };
     }
 

@@ -4,12 +4,12 @@ import Validator from '../Validator.js';
 class PatternHandler extends AbstractHandler {
     /**
      * Validate a value.
-     * @param {string} condition
-     * @param {string} source
+     * @param {object} request
      * @returns {boolean}
      * @private
      */
-    _validate (condition, source) {
+    _validate (request) {
+        const {condition, value} = request.getDetails();
         const conditionSchema = {
             condition: {
                 type: 'string',
@@ -25,12 +25,14 @@ class PatternHandler extends AbstractHandler {
         if (!conditionValidator.validate({condition})) {
             throw new Error('PatternHandler: max length needs to be a number');
         }
-        if (!sourceValidator.validate({source})) {
+        if (!sourceValidator.validate({
+            source: value,
+        })) {
             throw new Error('PatternHandler: source value needs to be a string');
         }
         conditionValidator.destroy();
         sourceValidator.destroy();
-        return new RegExp(condition).test(source);
+        return new RegExp(condition).test(value);
     }
 }
 

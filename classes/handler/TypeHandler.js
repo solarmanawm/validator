@@ -4,12 +4,12 @@ import AbstractHandler from './AbstractHandler.js';
 class TypeHandler extends AbstractHandler {
     /**
      * Validate a value.
-     * @param {string|string[]} condition
-     * @param {string} value
+     * @param {object} request
      * @returns {boolean}
      * @private
      */
-    _validate (condition, value) {
+    _validate (request) {
+        const {condition, value} = request.getDetails();
         const isString = typeof condition === 'string';
         const isArrayOfStrings = Array.isArray(condition) && condition.reduce((acc, current) => {
             return acc && typeof current === 'string';

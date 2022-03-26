@@ -4,12 +4,12 @@ import Validator from '../Validator.js';
 class MinValueHandler extends AbstractHandler {
     /**
      * Validate a value.
-     * @param {number} condition
-     * @param {string|number} source
+     * @param {object} request
      * @returns {boolean}
      * @private
      */
-    _validate (condition, source) {
+    _validate (request) {
+        const {condition, value} = request.getDetails();
         const conditionSchema = {
             condition: {
                 type: 'number',

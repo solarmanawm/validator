@@ -56,12 +56,13 @@ class AbstractHandler {
      * @returns {null|null}
      */
     handle (request) {
-        const {type, value, condition} = request.getDetails();
-        if (this._type === type) {
-            const message = this._validator._messages[type];
-            const valid = this._validate(condition, value);
-            this._validator.addFeedback(new Feedback(type, message, condition, valid));
+        const {type, condition} = request.getDetails();
+        if (request.isActive(this._type)) {
+            return;
         }
+        const message = this._validator._messages[type];
+        const valid = this._validate(request);
+        this._validator.addFeedback(new Feedback(type, message, condition, valid));
         return this._next ? this._next.handle(request) : null;
     }
 }

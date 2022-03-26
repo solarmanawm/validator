@@ -4,12 +4,12 @@ import Validator from '../Validator.js';
 class MinLengthHandler extends AbstractHandler {
     /**
      * Validate a value.
-     * @param {number} condition
-     * @param {string|[]} source
+     * @param {object} request
      * @returns {boolean}
      * @private
      */
-    _validate (condition, source) {
+    _validate (request) {
+        const {condition, value} = request.getDetails();
         const conditionSchema = {
             condition: {
                 type: 'number',
@@ -25,12 +25,14 @@ class MinLengthHandler extends AbstractHandler {
         if (!conditionValidator.validate({condition})) {
             throw new Error('MaxLengthHandler: max length needs to be a number');
         }
-        if (!sourceValidator.validate({source})) {
+        if (!sourceValidator.validate({
+            source: value,
+        })) {
             throw new Error('MaxLengthHandler: source value needs to be a string or an array');
         }
         conditionValidator.destroy();
         sourceValidator.destroy();
-        return source.length >= condition;
+        return value.length >= condition;
     }
 }
 
