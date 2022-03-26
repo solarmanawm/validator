@@ -84,8 +84,8 @@ class Validator {
         if (this._isRegisted) {
             return;
         }
-        Object.keys(this._schema).forEach((key) => {
-            const requests = this._requests.set(key, []).get(key);
+        Object.keys(this._schema).sort(Helpers.sortSchemaKeys).forEach((key) => {
+            const requests = [];
             const queue = new Queue();
             Object.keys(this._schema[key]).forEach((k) => {
                 const handler = Helpers.getHandler(this, k);
@@ -94,6 +94,7 @@ class Validator {
                     queue.add(handler);
                 }
             });
+            this._requests.set(key, requests.sort(Helpers.sortSchemaKeys));
             this._handlers.set(key, queue);
         });
         this._isRegisted = true;
